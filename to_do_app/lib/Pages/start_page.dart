@@ -94,7 +94,7 @@ class WelcomePage extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.w900,
-                      color: Colors.white,
+                      color: Colors.tealAccent,
                       shadows: [
                         Shadow(
                           color: Colors.tealAccent.withOpacity(0.5),
@@ -111,7 +111,7 @@ class WelcomePage extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 15,
                       height: 1.5,
-                      color: Colors.grey.shade400,
+                      color: Colors.grey,
                     ),
                   ),
                 ],
@@ -174,7 +174,10 @@ class WelcomePage extends StatelessWidget {
                       },
                       child: const Text(
                         "Already have an account? Sign In",
-                        style: TextStyle(fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ),

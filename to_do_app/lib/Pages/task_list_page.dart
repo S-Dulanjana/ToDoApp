@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_app/Pages/create_new_task.dart';
 
 // Paste this file into your lib/ and use it as the home page:
 // runApp(MaterialApp(home: TaskListPage()));
@@ -288,7 +289,14 @@ class _TaskListPageState extends State<TaskListPage> {
                   bottom: 18,
                   right: 18,
                   child: FloatingActionButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AddNewTaskPage(),
+                        ),
+                      );
+                    },
                     backgroundColor: primary,
                     child: const Icon(Icons.add, size: 32, color: Colors.black),
                     elevation: 8,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_app/Pages/create_new_task.dart';
 
 class CalendarTask {
   String title;
@@ -117,7 +118,14 @@ class _CalendarPageState extends State<CalendarPage> {
                       ),
                       FloatingActionButton(
                         backgroundColor: primary,
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => AddNewTaskPage(),
+                            ),
+                          );
+                        },
                         child: const Icon(Icons.add, color: Colors.black),
                         mini: true,
                       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_app/Pages/categorie_page.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -75,6 +76,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         Text(
                           'To-Do',
                           style: TextStyle(
+                            fontSize: 40,
                             fontWeight: FontWeight.w600,
                             color: isDark ? Colors.white : Colors.black87,
                           ),
@@ -396,7 +398,12 @@ class _SignInScreenState extends State<SignInScreen> {
                           height: 54,
                           child: ElevatedButton(
                             onPressed: () {
-                              // handle sign in / sign up action
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CategoriesPage(),
+                                ),
+                              );
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: _primaryColor(),

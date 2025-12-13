@@ -12,31 +12,29 @@ class CategoriesPage extends StatefulWidget {
 }
 
 class _CategoriesPageState extends State<CategoriesPage> {
-  int _selectedIndex = 1; // Default to Categories
+  int _selectedIndex = 1; // Categories tab
 
   void _onItemTapped(int index) {
-    if (index == _selectedIndex) return; // Do nothing if same tab
+    if (index == _selectedIndex) return;
 
-    if (index == 0) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (_) => const TaskListPage()),
-      );
-    } else if (index == 2) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (_) => const CalendarPage()),
-      );
-    } else if (index == 3) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (_) => const SettingsPage()),
-      );
+    Widget page;
+    switch (index) {
+      case 0:
+        page = const TaskListPage();
+        break;
+      case 1:
+        return; // already on Categories
+      case 2:
+        page = const CalendarPage();
+        break;
+      case 3:
+        page = const SettingsPage();
+        break;
+      default:
+        return;
     }
 
-    setState(() {
-      _selectedIndex = index;
-    });
+    Navigator.push(context, MaterialPageRoute(builder: (_) => page));
   }
 
   @override
@@ -47,6 +45,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
       backgroundColor: isDark
           ? const Color(0xFF10221c)
           : const Color(0xFFF6F8F7),
+
       appBar: AppBar(
         backgroundColor: isDark
             ? const Color(0xFF10221c)
@@ -66,11 +65,12 @@ class _CategoriesPageState extends State<CategoriesPage> {
           ),
         ],
       ),
+
       body: Padding(
         padding: const EdgeInsets.all(12),
         child: Column(
           children: [
-            // SEARCH BAR
+            // Search bar
             TextField(
               decoration: InputDecoration(
                 hintText: "Search categories...",
@@ -89,7 +89,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
               ),
             ),
             const SizedBox(height: 15),
-            // GRID VIEW
+
             Expanded(
               child: GridView.count(
                 crossAxisCount: 2,
@@ -111,7 +111,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                     "5 tasks",
                     Icons.person,
                     Colors.purple,
-                    0.50,
+                    0.5,
                   ),
                   _buildCategoryCard(
                     isDark,
@@ -127,7 +127,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                     "8 tasks due",
                     Icons.priority_high,
                     Colors.red,
-                    0.90,
+                    0.9,
                   ),
                   _buildCategoryCard(
                     isDark,
@@ -152,22 +152,23 @@ class _CategoriesPageState extends State<CategoriesPage> {
         ),
       ),
 
-      // Floating button only on Categories
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color(0xFF13ECA4),
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => AddNewTaskPage()),
+            MaterialPageRoute(builder: (_) => AddNewTaskPage()),
           );
         },
         child: const Icon(Icons.add, size: 30, color: Colors.black),
       ),
 
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: isDark ? const Color(0xFF10221c) : Colors.white,
         currentIndex: _selectedIndex,
         selectedItemColor: const Color(0xFF13ECA4),
-        unselectedItemColor: isDark ? Colors.white60 : Colors.black45,
+        unselectedItemColor: isDark ? Colors.white54 : Colors.black45,
         onTap: _onItemTapped,
         items: const [
           BottomNavigationBarItem(
@@ -252,7 +253,6 @@ class _CategoriesPageState extends State<CategoriesPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Icon + more
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
