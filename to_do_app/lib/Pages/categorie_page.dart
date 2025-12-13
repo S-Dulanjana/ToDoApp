@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_app/Pages/create_new_task.dart';
 import 'task_list_page.dart';
 import 'calendar_page.dart';
 import 'settings_page.dart';
@@ -154,7 +155,12 @@ class _CategoriesPageState extends State<CategoriesPage> {
       // Floating button only on Categories
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color(0xFF13ECA4),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddNewTaskPage()),
+          );
+        },
         child: const Icon(Icons.add, size: 30, color: Colors.black),
       ),
 

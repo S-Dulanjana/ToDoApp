@@ -82,6 +82,15 @@ class _CalendarPageState extends State<CalendarPage> {
                     children: [
                       Row(
                         children: [
+                          // ✅ Back Button Added
+                          IconButton(
+                            onPressed: () => Navigator.pop(context),
+                            icon: Icon(
+                              Icons.arrow_back,
+                              color: isDark ? Colors.white : Colors.black,
+                            ),
+                          ),
+
                           IconButton(
                             onPressed: () {},
                             icon: Icon(
@@ -116,7 +125,7 @@ class _CalendarPageState extends State<CalendarPage> {
                   ),
                 ),
 
-                // View Switcher (Segmented Control)
+                // View Switcher
                 Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 12,
@@ -176,7 +185,7 @@ class _CalendarPageState extends State<CalendarPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   child: Column(
                     children: [
-                      // Weekday headers
+                      // Weekdays
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: ['S', 'M', 'T', 'W', 'T', 'F', 'S']
@@ -197,17 +206,19 @@ class _CalendarPageState extends State<CalendarPage> {
                                 ),
                               ),
                             )
-                            .toList(), // Dart now knows this is List<Widget>
+                            .toList(),
                       ),
 
                       const SizedBox(height: 4),
-                      // Days Grid (simple 30-day month example)
+
+                      // Days
                       Wrap(
                         spacing: 4,
                         runSpacing: 4,
                         children: List.generate(30, (index) {
                           final day = index + 1;
                           final bool isSelected = selectedDay == day;
+
                           return GestureDetector(
                             onTap: () => setState(() => selectedDay = day),
                             child: Container(
@@ -271,7 +282,7 @@ class _CalendarPageState extends State<CalendarPage> {
 
                 const SizedBox(height: 12),
 
-                // Task List for selected day
+                // Task List Container
                 Expanded(
                   child: Container(
                     decoration: BoxDecoration(
@@ -316,6 +327,8 @@ class _CalendarPageState extends State<CalendarPage> {
                             ],
                           ),
                         ),
+
+                        // Task List
                         Expanded(
                           child: ListView.separated(
                             padding: const EdgeInsets.only(bottom: 20),
@@ -324,6 +337,7 @@ class _CalendarPageState extends State<CalendarPage> {
                                 const Divider(height: 0),
                             itemBuilder: (context, index) {
                               final task = tasks[index];
+
                               return ListTile(
                                 onTap: () {
                                   setState(() {

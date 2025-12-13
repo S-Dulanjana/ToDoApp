@@ -83,7 +83,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       Text(
                         "Create Account",
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 38,
                           fontWeight: FontWeight.bold,
                           color: isDark ? Colors.white : Colors.black,
                         ),
@@ -126,7 +126,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         _buildLabel("Full Name", isDark),
                         _buildInputField(
                           controller: fullNameController,
-                          hint: "John Doe",
+                          hint: "John Doe ",
                           icon: Icons.person,
                           isDark: isDark,
                         ),
@@ -292,20 +292,23 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
         borderRadius: BorderRadius.circular(14),
         border: Border.all(color: isDark ? borderDark : Colors.grey.shade300),
       ),
-      child: TextField(
-        controller: controller,
-        keyboardType: keyboardType,
-        style: TextStyle(color: isDark ? Colors.white : Colors.black),
-        decoration: InputDecoration(
-          hintText: hint,
-          hintStyle: TextStyle(
-            color: isDark ? const Color(0xFF92C9B7) : Colors.grey,
-          ),
-          border: InputBorder.none,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-          suffixIcon: Icon(
-            icon,
-            color: isDark ? const Color(0xFF92C9B7) : Colors.grey,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: TextField(
+          controller: controller,
+          keyboardType: keyboardType,
+          style: TextStyle(color: isDark ? Colors.white : Colors.black),
+          decoration: InputDecoration(
+            hintText: hint,
+            hintStyle: TextStyle(
+              color: isDark ? const Color(0xFF92C9B7) : Colors.grey,
+            ),
+            border: InputBorder.none,
+            contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+            suffixIcon: Icon(
+              icon,
+              color: isDark ? const Color(0xFF92C9B7) : Colors.grey,
+            ),
           ),
         ),
       ),
@@ -326,23 +329,26 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
         borderRadius: BorderRadius.circular(14),
         border: Border.all(color: isDark ? borderDark : Colors.grey.shade300),
       ),
-      child: TextField(
-        controller: controller,
-        obscureText: !isVisible,
-        style: TextStyle(color: isDark ? Colors.white : Colors.black),
-        decoration: InputDecoration(
-          hintText: "••••••••",
-          hintStyle: TextStyle(
-            color: isDark ? const Color(0xFF92C9B7) : Colors.grey,
-          ),
-          border: InputBorder.none,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-          suffixIcon: IconButton(
-            icon: Icon(
-              isVisible ? Icons.visibility : Icons.visibility_off,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: TextField(
+          controller: controller,
+          obscureText: !isVisible,
+          style: TextStyle(color: isDark ? Colors.white : Colors.black),
+          decoration: InputDecoration(
+            hintText: "••••••••",
+            hintStyle: TextStyle(
               color: isDark ? const Color(0xFF92C9B7) : Colors.grey,
             ),
-            onPressed: onToggle,
+            border: InputBorder.none,
+            contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+            suffixIcon: IconButton(
+              icon: Icon(
+                isVisible ? Icons.visibility : Icons.visibility_off,
+                color: isDark ? const Color(0xFF92C9B7) : Colors.grey,
+              ),
+              onPressed: onToggle,
+            ),
           ),
         ),
       ),

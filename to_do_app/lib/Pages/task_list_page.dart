@@ -29,31 +29,29 @@ class TaskListPage extends StatefulWidget {
 }
 
 class _TaskListPageState extends State<TaskListPage> {
-  // Colors from your Tailwind config
   final Color primary = const Color(0xFF13ECA4);
   final Color backgroundLight = const Color(0xFFF6F8F7);
   final Color backgroundDark = const Color(0xFF10221C);
   final Color surfaceLight = Colors.white;
   final Color surfaceDark = const Color(0xFF1C2E28);
 
-  // tasks matching the HTML content
   final List<Task> tasks = [
     Task(
       title: 'Design System Review',
       category: 'Work',
-      categoryColor: const Color(0xFF0EA5E9), // blue-ish
+      categoryColor: const Color(0xFF0EA5E9),
       timeText: '10:00 AM',
     ),
     Task(
       title: 'Buy Groceries',
       category: 'Personal',
-      categoryColor: const Color(0xFF60A5FA), // blue-400
+      categoryColor: const Color(0xFF60A5FA),
       timeText: '6:00 PM',
     ),
     Task(
       title: 'Gym Session',
       category: 'Health',
-      categoryColor: const Color(0xFF9F7AEA), // purple
+      categoryColor: const Color(0xFF9F7AEA),
       timeText: '7:00 AM',
       completed: true,
     ),
@@ -73,11 +71,8 @@ class _TaskListPageState extends State<TaskListPage> {
   ];
 
   bool notificationsOn = true;
+  String activeFilter = 'To Do';
 
-  // For chip selection state
-  String activeFilter = 'To Do'; // To Do, Done, Overdue
-
-  // Helper to format greeting date (e.g., Tuesday, Oct 24)
   String getFormattedDate() {
     final now = DateTime.now();
     const weekdays = [
@@ -121,9 +116,41 @@ class _TaskListPageState extends State<TaskListPage> {
             constraints: const BoxConstraints(maxWidth: 420),
             child: Stack(
               children: [
-                // Main column scrollable
+                // --------------------------
+                // NEW BACK BUTTON (TOP-LEFT)
+                // --------------------------
+                Positioned(
+                  top: 16,
+                  left: 16,
+                  child: GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: isDark ? surfaceDark : surfaceLight,
+                        shape: BoxShape.circle,
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Color.fromRGBO(2, 6, 23, 0.06),
+                            blurRadius: 6,
+                            offset: Offset(0, 3),
+                          ),
+                        ],
+                      ),
+                      child: Icon(
+                        Icons.arrow_back,
+                        color: isDark ? Colors.white : Colors.black,
+                      ),
+                    ),
+                  ),
+                ),
+
+                // Main UI column
                 Column(
                   children: [
+                    const SizedBox(height: 40),
+
                     // Header
                     Padding(
                       padding: const EdgeInsets.fromLTRB(24, 24, 24, 8),
@@ -150,7 +177,6 @@ class _TaskListPageState extends State<TaskListPage> {
                           ),
                           Row(
                             children: [
-                              // avatar button
                               InkWell(
                                 onTap: () {},
                                 borderRadius: BorderRadius.circular(999),
@@ -182,7 +208,7 @@ class _TaskListPageState extends State<TaskListPage> {
                       ),
                     ),
 
-                    // Greeting & Date
+                    // Greeting
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 24),
                       child: Column(
@@ -239,7 +265,7 @@ class _TaskListPageState extends State<TaskListPage> {
 
                     const SizedBox(height: 12),
 
-                    // Task list (scrollable)
+                    // Task list
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -249,8 +275,7 @@ class _TaskListPageState extends State<TaskListPage> {
                           separatorBuilder: (_, __) =>
                               const SizedBox(height: 10),
                           itemBuilder: (context, index) {
-                            final task = tasks[index];
-                            return _buildTaskItem(task, index, isDark);
+                            return _buildTaskItem(tasks[index], index, isDark);
                           },
                         ),
                       ),
@@ -258,7 +283,7 @@ class _TaskListPageState extends State<TaskListPage> {
                   ],
                 ),
 
-                // FAB bottom-right
+                // FAB
                 Positioned(
                   bottom: 18,
                   right: 18,
@@ -270,7 +295,7 @@ class _TaskListPageState extends State<TaskListPage> {
                   ),
                 ),
 
-                // background subtle gradient effect at top
+                // top gradient
                 Positioned(
                   top: 0,
                   left: 0,
@@ -299,9 +324,9 @@ class _TaskListPageState extends State<TaskListPage> {
     );
   }
 
-  // Filter chip widget (To Do / Done / Overdue)
   Widget _filterChip(String label, {int count = 0, bool active = true}) {
     final bool isActive = active && (activeFilter == label);
+
     return GestureDetector(
       onTap: () => setState(() => activeFilter = label),
       child: Container(
@@ -316,7 +341,6 @@ class _TaskListPageState extends State<TaskListPage> {
           borderRadius: BorderRadius.circular(999),
         ),
         child: Row(
-          mainAxisSize: MainAxisSize.min,
           children: [
             Text(
               label,
@@ -329,45 +353,44 @@ class _TaskListPageState extends State<TaskListPage> {
                           : Colors.black87),
               ),
             ),
-            if (count >= 0) const SizedBox(width: 8),
-            if (count >= 0)
-              Container(
-                width: 22,
-                height: 22,
-                decoration: BoxDecoration(
-                  color: isActive
-                      ? (Theme.of(context).brightness == Brightness.dark
-                            ? backgroundDark.withOpacity(0.2)
-                            : Colors.black12)
-                      : (Theme.of(context).brightness == Brightness.dark
-                            ? Colors.white10
-                            : Colors.black12),
-                  borderRadius: BorderRadius.circular(999),
-                ),
-                child: Center(
-                  child: Text(
-                    '$count',
-                    style: TextStyle(
-                      fontSize: 11,
-                      fontWeight: FontWeight.bold,
-                      color: isActive
-                          ? Colors.black
-                          : (Theme.of(context).brightness == Brightness.dark
-                                ? Colors.white
-                                : Colors.black87),
-                    ),
+            const SizedBox(width: 8),
+            Container(
+              width: 22,
+              height: 22,
+              decoration: BoxDecoration(
+                color: isActive
+                    ? (Theme.of(context).brightness == Brightness.dark
+                          ? backgroundDark.withOpacity(0.2)
+                          : Colors.black12)
+                    : (Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white10
+                          : Colors.black12),
+                borderRadius: BorderRadius.circular(999),
+              ),
+              child: Center(
+                child: Text(
+                  '$count',
+                  style: TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                    color: isActive
+                        ? Colors.black
+                        : (Theme.of(context).brightness == Brightness.dark
+                              ? Colors.white
+                              : Colors.black87),
                   ),
                 ),
               ),
+            ),
           ],
         ),
       ),
     );
   }
 
-  // Task item
   Widget _buildTaskItem(Task task, int index, bool isDark) {
     final bool completed = task.completed;
+
     return Material(
       color: isDark ? surfaceDark : surfaceLight,
       borderRadius: BorderRadius.circular(18),
@@ -380,13 +403,8 @@ class _TaskListPageState extends State<TaskListPage> {
         },
         child: Container(
           padding: const EdgeInsets.all(14),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(18),
-            border: Border.all(color: Colors.transparent),
-          ),
           child: Row(
             children: [
-              // circular checkbox mimic
               GestureDetector(
                 onTap: () {
                   setState(() {
@@ -416,7 +434,6 @@ class _TaskListPageState extends State<TaskListPage> {
               ),
               const SizedBox(width: 12),
 
-              // main content
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -472,8 +489,8 @@ class _TaskListPageState extends State<TaskListPage> {
                 ),
               ),
 
-              // trailing actions (more / delete)
               const SizedBox(width: 6),
+
               AnimatedOpacity(
                 duration: const Duration(milliseconds: 160),
                 opacity: 1.0,
