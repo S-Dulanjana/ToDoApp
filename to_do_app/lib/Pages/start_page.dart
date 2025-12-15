@@ -14,19 +14,23 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "DoIt App",
+      color: const Color(0xFF051918),
+
       theme: ThemeData(
-        brightness: Brightness.light,
+        useMaterial3: false,
+        brightness: Brightness.dark,
         primaryColor: const Color(0xFF13ECA4),
-        scaffoldBackgroundColor: Colors.black,
+        scaffoldBackgroundColor: const Color(0xFF051918),
         fontFamily: 'Inter',
       ),
       darkTheme: ThemeData(
+        useMaterial3: false,
         brightness: Brightness.dark,
         primaryColor: const Color(0xFF13ECA4),
         scaffoldBackgroundColor: const Color(0xFF051918), // dark greenish-black
         fontFamily: 'Inter',
       ),
-      themeMode: ThemeMode.system,
+      themeMode: ThemeMode.dark,
       home: const WelcomePage(),
     );
   }
