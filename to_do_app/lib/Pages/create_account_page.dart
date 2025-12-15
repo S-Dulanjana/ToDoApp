@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:to_do_app/Pages/categorie_page.dart';
+import 'package:to_do_app/Pages/sign_in_page.dart';
 
 class CreateAccountScreen extends StatefulWidget {
   const CreateAccountScreen({super.key});
@@ -236,7 +237,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => CategoriesPage(),
+                                  builder: (context) => SignInScreen(),
                                 ),
                               );
                             },
