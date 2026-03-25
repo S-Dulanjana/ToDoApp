@@ -1,7 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:to_do_app/Pages/categorie_page.dart';
+
 import 'package:to_do_app/Pages/sign_in_page.dart';
 
 class CreateAccountScreen extends StatefulWidget {
